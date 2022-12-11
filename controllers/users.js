@@ -70,6 +70,7 @@ module.exports.show = async function (req, res, next) {
 };
 
 module.exports.usernamecheck = async function (req, res, next) {
+    console.log(req.headers.referer)
     const username = req.body.username;
     const findUser = await User.findOne({ username: username });
     if (findUser) {

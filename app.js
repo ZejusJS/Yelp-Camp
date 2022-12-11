@@ -121,6 +121,9 @@ app.use(
             ],
             fontSrc: ["'self'", ...fontSrcUrls],
         },
+    }),
+    helmet.referrerPolicy({
+        policy: "unsafe-url",
     })
 );
 
