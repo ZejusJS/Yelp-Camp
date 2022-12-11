@@ -162,7 +162,7 @@ const campgroundRout = require('./routes/campgrounds-route');
 const reviewRout = require('./routes/reviews-route');
 const authRout = require('./routes/users-route');
 const tryRout = require('./routes/try-route');
-const commentRout = require('./routes/comment-route');
+const commentRout = require('./routes/comment-route')
 
 app.use('/campgrounds', campgroundRout);
 app.use('/campgrounds/:campId/reviews', reviewRout);
