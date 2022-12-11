@@ -1,0 +1,70 @@
+body {
+    background-image: url('/imgs/campground-home.jpg');
+    background-position: top;
+    background-size: cover;
+}
+
+.header-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    margin-top: 30px;
+    font-size: 42px;
+}
+
+h1 span {
+    white-space: nowrap;
+}
+
+h2 {
+    margin-top: 30px;
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 27px;
+}
+
+.features-section {
+    margin: 40px 0 40px 0;
+    display: flex;
+    gap: 100px;
+    row-gap: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.features-section .feature {
+    width: 350px;
+    background-color: rgb(80, 17, 197);
+    padding: 20px 35px;
+    border-radius: 7px;
+
+    box-shadow: 0 3px 29px -8px black;
+}
+
+.features-section a {
+    color: rgb(227, 134, 255);
+}
+
+.features-section a:hover {
+    color: rgb(239, 188, 255);
+}
+
+@media (max-width: 510px) {
+    h1 {
+        font-size: 35px;
+    }
+    h2 {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 450px) {
+    .features-section .feature {
+        padding: 17px 20px;
+    }
+}

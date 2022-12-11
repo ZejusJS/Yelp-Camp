@@ -1,0 +1,264 @@
+textarea,
+input {
+    outline: none;
+}
+
+
+a.link-camp.index {
+    color: rgb(188, 152, 255);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 22px;
+}
+
+a.link-camp.index:hover {
+    text-decoration: underline;
+}
+
+.list-camps {
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.list-camps img {
+    height: 370px;
+    width: 370px;
+    object-fit: cover;
+    object-position: bottom;
+}
+
+.campground-view {
+    display: flex;
+    gap: 5px;
+    margin: 2px 0 2px 0;
+    border: 1px solid gray;
+    background-color: rgb(43, 43, 43);
+}
+
+.camp-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.camp-info-container p {
+    margin-bottom: 8px;
+}
+
+.camp-description.index {
+    padding-right: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (max-width: 740px) {
+    .campground-view {
+        flex-direction: column;
+        padding-bottom: 20px;
+    }
+
+    .camp-info-container {
+        padding: 0.43rem;
+    }
+
+    .list-camps img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* @media (max-width: 430px) {
+    .campground-view {
+        width: 100%;
+    }
+} */
+
+p.avg-rating {
+    color: #ffc83d;
+    font-weight: 700;
+    font-size: 21px;
+    margin-bottom: 0;
+}
+
+
+
+
+#show-map {
+    color: white;
+    border: none;
+    text-align: center;
+    max-height: 40px;
+    height: 40px;
+    width: 270px;
+    background-color: rgb(54, 54, 54);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    margin: 5px auto 0 auto;
+
+    cursor: pointer;
+    user-select: none;
+
+    font-size: 20px;
+
+    opacity: 1;
+    transition: opacity 200ms, background-color 150ms, max-height 150ms;
+}
+
+#show-map .spinner-border {
+    display: none;
+}
+
+#show-map span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#show-map img {
+    width: 30px;
+}
+
+#show-map:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+#show-map.hide-showmap {
+    max-height: 0px;
+    margin: 0;
+}
+
+#show-map .spinner-border {
+    display: none;
+}
+
+.map {
+    display: none;
+    width: 100%;
+    height: 450px;
+    max-height: 0px;
+    color: black;
+
+    transition: max-height 400ms;
+}
+
+.map h5,
+.map p {
+    margin-bottom: 0;
+}
+
+.map.map-showed {
+    max-height: 450px;
+}
+
+.mapboxgl-canvas {
+    height: 450px;
+}
+
+main:has(.map-showed) #show-map {
+    opacity: 0;
+}
+
+@media (max-width: 330px) {
+    #show-map {
+        width: 100%;
+        font-size: 17.2px;
+    }
+
+    #show-map img {
+        width: 20px;
+    }
+}
+
+@media (max-width: 240px) {
+    #show-map {
+        height: 55px;
+    }
+}
+
+.camp-search-container {
+    display: flex;
+    gap: 5px;
+}
+
+.camp-search-container label {
+    display: flex;
+    align-content: center;
+    position: relative;
+    top: -3px;
+}
+
+.camp-search {
+    width: 350px;
+    border-radius: 10px;
+    border: 2px solid rgb(192, 192, 192);
+    margin: 1px 0 10px 0;
+    background-color: transparent;
+    color: white;
+    padding: 5px 3px;
+}
+
+.camp-search:focus {
+    border: 2px solid rgb(255, 255, 255);
+}
+
+img.search-lupa {
+    width: 29px;
+    object-fit: contain;
+    object-position: center;
+}
+
+@media (max-width: 270px) {
+    .camp-search {
+        font-size: 14.5px;
+        width: 100%;
+    }
+    img.search-lupa {
+        width: 25px;
+    }
+    .camp-search-container {
+        gap: 3px;
+    }
+}
+
+.search-campgrounds {
+    color: rgb(219, 219, 219);
+    display: flex;
+    flex-direction: column;
+}
+
+.search-campgrounds fieldset {
+    position: relative;
+    top: -5px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    row-gap: 0px;
+}
+
+.search-campgrounds p {
+    margin: 0;
+    margin-right: 1px;
+    white-space: nowrap;
+}
+
+.search-campgrounds div {
+    white-space: nowrap;
+}
+
+.camp-search-params {
+    max-height: 0;
+    height: fit-content;
+    overflow: hidden;
+
+    transition: max-height 400ms ease-in;
+}
+
+.camp-search-params.params-expanded {
+    max-height: 70px;
+}

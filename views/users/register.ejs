@@ -1,0 +1,28 @@
+<% layout('layouts/boilerplate') %>
+<link href="/css/user-auth.css" rel="stylesheet" type="text/css" autocomplete="off">
+<section class="auth-container">
+  <h1>Register</h1>
+  <div class="auth-form">
+    <form action="/user/register" method="POST" id="register-form" novalidate>
+      <div class="auth-input-container">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" err-msg="Insert valid email" autocomplete="new-username">
+        <span class="error-msg" id="email-err"></span>
+      </div>
+      <div class="auth-input-container">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" err-msg="Username must has length between 5 to 24 and cannot contain special characters." autocomplete="new-username">
+        <span class="error-msg" id="username-err"></span>
+        <span class="error-msg" id="username-exists-err"></span>
+      </div>
+      <div class="auth-input-container">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" err-msg="Password must has length between 5 to 40" autocomplete="new-password">
+        <span class="error-msg" id="password-err"></span>
+      </div>
+      <button type="submit" class="btn-auth-send" id="register-btn">Register</button>
+      <p class="auth-change">Already have an account? <a href="/user/login">Log in</a></p>
+    </form>
+  </div>
+  <script src="/js/auth-register.js"></script>
+</section>

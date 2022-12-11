@@ -1,0 +1,193 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(36, 36, 36);
+    color: white;
+
+    margin-top: 60px;
+}
+
+main {
+    overflow-wrap: break-word;
+}
+
+a {
+    color: rgb(188, 152, 255);
+}
+
+a:hover {
+    color: rgb(216, 195, 255);
+}
+
+main.main-container {
+    width: 80%;
+    max-width: 2000px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1300px) {
+    main.main-container {
+        width: 93%;
+    }
+}
+
+@media (max-width: 430px) {
+    main.main-container {
+        width: 100%;
+        padding: 5px;
+    }
+}
+
+.gps-icon-camp {
+    width: 22px;
+}
+
+h2 .gps-icon-camp {
+    width: 32px;
+}
+
+
+.back-to-campgrounds .decline-cross {
+    width: 17px;
+}
+
+.back-to-campgrounds {
+    display: flex;
+    align-items: stretch;
+    gap: 3px;
+    font-size: 22px;
+    width: 90px;
+}
+
+.back-to-campgrounds a {
+    display: flex;
+    gap: 3px;
+    text-decoration: none;
+    color: #FF6465;
+}
+
+.back-to-campgrounds svg {
+    fill: #FF6465;
+}
+
+.back-to-campgrounds a:hover {
+    color: #ff3939;
+}
+
+.back-to-campgrounds a:hover svg {
+    fill: #ff3939;
+}
+
+.back-to-campgrounds a:active {
+    color: #ff1111;
+}
+
+.back-to-campgrounds a:active svg {
+    color: #ff1111;
+}
+
+.not-selectable,
+button {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.flash-message {
+    position: relative;
+    text-align: center;
+    padding: 3px 26px 3px 26px;
+    border-radius: 3px;
+    max-width: 600px;
+    margin: 10px auto 5px auto;
+
+    overflow-wrap: break-word;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flash-message span {
+    overflow: hidden;
+}
+
+.close-btn {
+    background-color: transparent;
+    color: #ff1111;
+    font-size: 25px;
+    line-height: 28px;
+    padding: 0 7px;
+    border: 0;
+    max-width: 30px;
+}
+
+.flash-message .close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.flash-message.success {
+    background-color: rgba(0, 177, 0, 0.452);
+    color: rgb(95, 255, 95);
+}
+
+.flash-message.error {
+    background-color: rgba(138, 0, 0, 0.425);
+    color: rgb(255, 142, 142);
+}
+
+.flash-message.success .close-btn {
+    color: rgb(0, 255, 0);
+}
+
+.flash-message.error .close-btn {
+    color: rgb(255, 142, 142);
+}
+
+.to-be-remove {
+    transition: opacity 150ms;
+}
+
+.lighter-background {
+    background-color: rgb(41, 41, 41);
+}
+
+.starability-basic {
+    margin-top: 10px;
+    height: 40px !important;
+}
+
+.btn-normal {
+    border: 0;
+    margin: 3px 0 0 0;
+    background-color: rgb(188, 152, 255);
+    border-radius: 0.375rem;
+    border: 0;
+    padding: 5px 7px;
+    transition: background-color 180ms;
+    color: black;
+    text-decoration: none;
+    user-select: none;
+}
+
+.btn-normal:hover {
+    background-color: rgb(212, 188, 255);
+    color: black;
+    cursor: pointer;
+}
+
+.btn-normal.btn-small-delete {
+    background-color: rgb(248, 63, 57);
+    padding: 3px 3px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.btn-normal.btn-normal:hover {
+    background-color: rgb(255, 106, 101);
+    color: black;
+    cursor: pointer;
+}

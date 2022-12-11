@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/about.css">
+<h1>About this site</h1>
+<p>This site is my first project in web developing. It isn't mean to be useful, but fully functional website with basic authentication.</p>
+<p>I followed course on Udemy by Colt: <a href="https://www.udemy.com/course/the-web-developer-bootcamp/">https://www.udemy.com/course/the-web-developer-bootcamp/</a>.
+  I added some things that weren't show in this course. For example:
+<ul>
+  <li>Infinite scrolling. Created route for that.</li>
+  <li>Searching for campgrounds.</li>
+  <li>Avarage rating for campgrounds.</li>
+  <li>Checking if username exists right in the register form. Created route for that checking.</li>
+  <li>More form validation on client side.</li>
+  <li>User profile route.</li>
+  <li>Route for accessing data for MapBox map with Axios, so the data won't be longer in HTML code.</li>
+  <li>MapBox map is accesseble through button, so it doesn't make request on every load of page.</li>
+  <li>Secure deleting images in campgrounds. Because in Colt's course was only function for checking if requester is author of campground, then when requester changed value of input:checkbox 
+    (if checkbox checked, particular image deletes) in HTML he could delete someone else's image in Cloadinary. This was because checkbox's value is path to delete particular image. Now it checks if image for
+    deletion is in campground at all (if campground belongs to requester was checked before).
+  </li>
+  <li>If there is a error while creating/editing campground, the images that were uploaded with the request are deleted from Cloudinary.</li>
+  <li>Comment section for campgrounds.</li>
+  <li>Rate limit on requests by user or IP adress.</li>
+</ul>
+</p>

@@ -1,0 +1,468 @@
+section.campground-container {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    margin: 40px auto;
+}
+
+.infos-show,
+.reviews-main-container {
+    background-color: rgb(48, 48, 48);
+    border: 1px solid rgb(77, 77, 77);
+}
+
+.info-main-container {
+    width: 60%;
+}
+
+.info-review-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.reviews-main-container {
+    width: 40%;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1100px) {
+    .reviews-main-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .info-main-container {
+        width: 100%;
+    }
+
+    .info-review-container {
+        flex-direction: column;
+    }
+
+    section.campground-container {
+        width: 600px;
+    }
+}
+
+section.campground-container .img-container img {
+    height: 370px;
+    width: 100%;
+    object-fit: contain;
+}
+
+@media (max-width: 400px) {
+    section.campground-container .img-container img {
+        height: 80vw;
+    }
+}
+
+section.campground-container .camp-info-show:not(.img-container) {
+    padding: 3px 7px 3px 7px;
+}
+
+section.campground-container p,
+section.campground-container h1 {
+    margin: 2px 0;
+}
+
+
+section.campground-container .camp-info-show:not(:last-of-type) {
+    border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+section.campground-container .gps-icon-camp {
+    width: 15px;
+    height: auto;
+}
+
+.campground-container .location-line {
+    display: flex;
+    color: rgb(179, 179, 179);
+}
+
+.campground-container .camp-info-show:has(form .btn) {
+    padding: 8px 7px 8px 7px;
+    display: flex;
+    gap: 8px;
+}
+
+button.btn {
+    padding: 4px 8px;
+}
+
+div.time-of-create {
+    background-color: rgb(77, 77, 77);
+}
+
+div.time-of-create p {
+    font-size: 0.8rem;
+    color: rgb(163, 163, 163);
+    margin: 0;
+}
+
+.delete-camp-btn {
+    display: inline-block;
+}
+
+
+
+.reviews-container {
+    padding: 3px 7px;
+    border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+#add-review-btn {
+    padding: 0;
+    font-size: 20px;
+    background-color: transparent;
+    color: white;
+    border: 0;
+    color: #ffc83d;
+}
+
+#add-review-btn:hover span {
+    text-decoration: underline;
+}
+
+.expandable-add-review {
+    overflow: hidden;
+    max-height: 0px;
+
+    transition: max-height 0.2s;
+}
+
+.expanded-add-review {
+    max-height: 600px;
+}
+
+.rating-div {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.not-logged#starability-basic {
+    pointer-events: none;
+    color: #DC3545;
+}
+
+.rating-div #rating {
+    width: 150px;
+}
+
+.body-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.body-div #review-body {
+    width: 100%;
+    max-height: 200px;
+    min-height: 200px;
+    resize: none;
+    box-sizing: border-box;
+}
+
+form#review-form .bad-review {
+    outline: 1.5px red solid;
+    background-color: rgb(219, 219, 219);
+    color: red;
+}
+
+form#review-form .right-review {
+    outline: 1.5px rgb(51, 255, 0) solid;
+    background-color: white;
+    color: black;
+}
+
+#review-submit {
+    margin: 7px 0 7px 0;
+    background-color: #ffc83d;
+    border-radius: 0.375rem;
+    border: 0;
+    padding: 5px 4.5px;
+    transition: background-color 180ms;
+}
+
+#review-submit:hover {
+    background-color: #ffb700;
+}
+
+h4.review-header {
+    padding: 0 0 0 7px;
+    margin-bottom: 0;
+}
+
+.reviews-show h5 {
+    margin: 0 0 0 0;
+}
+
+.reviews-show h5.review-author {
+    font-size: 17px;
+}
+
+.review {
+    padding: 6px 7px;
+    border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+.reviews-show div.review p {
+    margin: 1px 0 0 0;
+}
+
+.btn-review-delete {
+    background-color: #DC3545;
+    color: white;
+    margin: 4px 0 0 0;
+    padding: 2px 4px;
+    border: 0;
+    border-radius: 6px;
+}
+
+.campground-author {
+    color: rgb(188, 152, 255);
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.campground-author a {
+    text-decoration: none;
+    color: rgb(198, 167, 255);
+}
+
+.campground-author a:hover {
+    text-decoration: underline;
+}
+
+
+span.not-logged {
+    font-size: 15px;
+    color: rgb(224, 224, 224);
+    white-space: nowrap;
+    line-height: 13px;
+}
+
+span.not-logged a {
+    color: #579aff;
+}
+
+span.not-logged a:hover {
+    color: #3c8aff;
+}
+
+#review-submit.not-logged {
+    background-color: #b18310;
+    color: rgb(61, 61, 61);
+    opacity: 0.6;
+}
+
+#review-body.not-logged {
+    height: 70px;
+    min-height: 70px;
+}
+
+.review-author a {
+    color: white;
+    text-decoration: none;
+}
+
+.review-author a:hover {
+    text-decoration: underline;
+}
+
+#show-map {
+    color: white;
+    border: none;
+    text-align: center;
+    height: 40px;
+    max-height: 40px;
+    width: 200px;
+    background-color: rgb(70, 70, 70);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    margin: 5px auto;
+
+    cursor: pointer;
+    user-select: none;
+
+    font-size: 20px;
+
+    opacity: 1;
+    transition: opacity 200ms, background-color 150ms, max-height 150ms;
+}
+
+#show-map .spinner-border {
+    display: none;
+}
+
+#show-map span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 30px;
+}
+
+#show-map img {
+    width: 30px;
+    height: 30px;
+}
+
+#show-map:hover {
+    background-color: rgb(85, 85, 85);
+}
+
+#show-map.hide-showmap {
+    max-height: 0px;
+    margin: 0;
+}
+
+#show-map .spinner-border {
+    display: none;
+}
+
+.map {
+    display: none;
+    width: 100%;
+    height: 400px;
+    max-height: 0px;
+    color: black;
+
+    transition: max-height 400ms;
+}
+
+.map h5,
+.map p {
+    margin-bottom: 0;
+}
+
+.map.map-showed {
+    max-height: 450px;
+}
+
+.mapboxgl-canvas {
+    height: 450px;
+}
+
+.map.map-showed h2 {
+    font-size: 20px;
+}
+
+main:has(.map-showed) #show-map {
+    opacity: 0;
+}
+
+@media (max-width: 330px) {
+    #show-map {
+        width: 90%;
+        font-size: 19px;
+    }
+
+    #show-map img {
+        width: 24px;
+    }
+}
+
+.avg-rating {
+    color: #ffc83d;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 10px;
+    padding: 0 20px;
+}
+
+.comment-form h4 {
+    margin-bottom: 2px;
+}
+
+.comment-form button {
+    width: 100px;
+    margin: 3px 0 0 0;
+    background-color: rgb(188, 152, 255);
+    border-radius: 0.375rem;
+    border: 0;
+    padding: 5px 4.5px;
+    transition: background-color 180ms;
+}
+
+.comment-form button:hover {
+    background-color: rgb(212, 188, 255);
+}
+
+.comment-form textarea {
+    height: 180px;
+    resize: none;
+
+    background-color: rgb(44, 44, 44);
+    color: white;
+}
+
+.comment-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.comment-section h3 {
+    margin: 0;
+}
+
+.comment {
+    border: 1px solid rgba(182, 182, 182, 0.61);
+    padding: 5px;
+}
+
+.comment-info {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    row-gap: 3px;
+    margin-bottom: 4px;
+}
+.comment-info h5 {
+    margin: 0;
+}
+
+.comment-info .created-at {
+    font-size: 13px;
+    color: rgb(211, 211, 211);
+}
+
+
+@media (max-width: 700px) {
+    section.campground-container {
+        width: 100%;
+    }
+    .comment-form {
+        padding: 0;
+    }
+    .comment-form textarea {
+        height: 250px;
+    }
+}
+
+.not-login {
+    margin: 20px auto 8px auto;
+    padding: 7px;
+    border: 1px solid grey;
+}
+
+.not-login p {
+    text-align: center;
+    font-size: 18px;
+}

@@ -1,0 +1,17 @@
+<% if (success && success.length) { %>
+<div class="flash-message success to-be-remove" role="alert">
+  <span><%= success %></span>
+  <button class="close-btn" aria-label="Close" type="button">
+    &times;
+  </button>
+</div>
+<% } %>
+
+<% if (error && error.length) { %>
+<div class="flash-message error to-be-remove" role="alert">
+  <span><%= error %></span>
+  <button class="close-btn" aria-label="Close" type="button">
+    &times;
+  </button>
+</div>
+<% } %>

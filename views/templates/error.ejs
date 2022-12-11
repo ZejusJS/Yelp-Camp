@@ -1,0 +1,6 @@
+<% layout('layouts/boilerplate') %>
+<div class="somethingWentWrong-container">
+  <h3>Something went wrong....</h3>
+  <h2><%= err.message %> (<%= err.status %>)</h2>
+  <% if (process.env.NODE_ENV !== 'production') { %> <p><%= err.stack %></p> <% }%>
+</div>

@@ -1,0 +1,22 @@
+<% layout('layouts/boilerplate') %>
+<link href="/css/user-auth.css" rel="stylesheet" type="text/css" autocomplete="off">
+<section class="auth-container">
+  <h1>Log in</h1>
+  <div class="auth-form">
+    <form action="/user/login" method="POST" id="login-form">
+      <div class="auth-input-container">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" err-msg="Insert valid email" autocomplete="username">
+        <span class="error-msg" id="email-err"></span>
+      </div>
+      <div class="auth-input-container">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" err-msg="Password must has length between 5 and 40" autocomplete="current-password">
+        <span class="error-msg" id="password-err"></span>
+      </div>
+      <button type="submit" class="btn-auth-send">Log in</button>
+      <p class="auth-change">Are you new? <a href="/user/register">Register</a></p>
+    </form>
+  </div>
+  <script src="/js/auth-login.js"></script>
+</section>

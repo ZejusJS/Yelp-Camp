@@ -1,0 +1,253 @@
+footer,
+nav {
+    background-color: rgb(89, 0, 255);
+    color: white;
+}
+
+nav {
+    padding: 7px;
+    display: block;
+    align-items: center;
+
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+
+    overflow: hidden;
+
+    transition: max-height 2s;
+}
+
+nav p a {
+    color: white;
+    text-decoration: none;
+}
+
+nav p a:hover {
+    color: rgb(219, 219, 219);
+}
+
+.nav-item a {
+    max-height: 27px;
+}
+
+div.nav-container {
+    display: flex;
+    overflow: hidden;
+}
+
+div.nav-main {
+    display: flex;
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+div.nav-main svg {
+    display: none;
+}
+
+div.nav-items {
+    display: flex;
+    overflow: hidden;
+}
+
+div.nav-items ul {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+
+    align-items: center;
+    overflow: hidden;
+}
+
+div.nav-items {
+    margin: 0 18px 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 22px;
+}
+
+.nav-item {
+    border-bottom: 2px solid;
+    border-color: transparent;
+    transition: border-color 0.3s;
+}
+
+nav ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+nav ul a {
+    color: white;
+    text-decoration: none;
+}
+
+nav ul a:hover {
+    color: white;
+}
+
+nav p {
+    margin-bottom: 0;
+    font-size: 25px;
+    height: 40px;
+}
+
+div.nav-items .nav-item:has(a:hover) {
+    border-color: white;
+}
+
+nav ul a {
+    font-size: 20px;
+}
+
+@media (min-width: 851px) {
+    div.nav-items {
+        gap: 10px;
+    }
+
+    ul.nav-items-links {
+        padding-right: 12px;
+        border-right: 3px solid rgba(255, 255, 255, 0.904);
+    }
+}
+
+@media (max-width: 850px) {
+    div.nav-container {
+        flex-direction: column;
+    }
+
+    div.nav-main {
+        width: 100%;
+    }
+
+    div.nav-main svg {
+        margin-left: auto;
+    }
+
+    div.nav-container svg {
+        filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.65));
+    }
+
+    div.nav-items {
+        flex-shrink: 100;
+        flex-direction: column;
+        gap: 10px;
+
+        border-right: white 3px solid;
+    }
+
+    div.nav-items ul {
+        flex-direction: column;
+        align-items: flex-end;
+        margin: 0 10px 0 auto;
+
+        overflow: visible;
+        text-align: right;
+    }
+
+    div.nav-main svg {
+        display: inline-block;
+        transition: transform 0.2s ease-in;
+        cursor: pointer;
+    }
+
+    div.nav-container {
+        max-height: 40px;
+        transition: max-height 300ms;
+    }
+
+    /* div.nav-items li a {
+        position: relative;
+        opacity: 0.5;
+        left: 45px;
+        z-index: 800;
+        transition: left 400ms, opacity 490ms ease;
+        text-align: right;
+    } */
+
+    div.nav-items ul {
+        position: relative;
+        opacity: 0.5;
+        left: 105px;
+        z-index: 800;
+        transition: left 400ms, opacity 490ms ease;
+        text-align: right;
+    }
+
+    div.nav-items li a:hover {
+        color: white;
+    }
+
+    ul.nav-items-links {
+        padding-bottom: 12px;
+        border-bottom: 3px solid rgba(255, 255, 255, 0.856);
+    }
+}
+
+div.nav-expanded {
+    max-height: 350px !important;
+}
+
+div.nav-expanded svg {
+    transform: rotateX(180deg);
+}
+
+/* div.nav-expanded div.nav-items li a {
+    left: 0;
+    opacity: 1;
+} */
+
+div.nav-expanded div.nav-items ul {
+    left: 0;
+    opacity: 1;
+}
+
+.nav-item.with-icon a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-item.with-icon img {
+    flex-shrink: 0;
+    display: inline-block;
+    width: 22px;
+}
+
+.nav-item.with-icon span {
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+a:hover {
+    color: rgb(89, 0, 255);
+}
+
+
+ 
+/* ------------------ */
+
+
+
+
+.footer-main {
+    padding: 10px 30px;
+    color: rgb(209, 209, 209);
+    margin-top: auto;
+    min-height: 34px;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 5px;
+}
+
+.footer-main a {
+    color: white;
+}

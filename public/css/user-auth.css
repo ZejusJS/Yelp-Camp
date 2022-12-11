@@ -1,0 +1,90 @@
+.auth-container {
+    margin: 13px auto;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border: 1px solid rgb(77, 77, 77);
+    border-radius: 6px;
+    gap: 14px;
+}
+
+@media (max-width: 660px) {
+    .auth-container {
+        width: 100%;
+        padding: 3px;
+    }
+}
+
+.auth-container h1 {
+    margin: 0;
+    text-align: center;
+}
+
+.auth-form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-auth-send {
+    width: 40%;
+    min-width: 150px;
+    margin: 12px auto;
+    padding: 4px 11px;
+    color: white;
+    background-color: rgb(41, 119, 34);
+    border: 0;
+    border-radius: 6px;
+}
+
+button.btn-auth-send:hover {
+    background-color: rgb(36, 97, 30);
+}
+
+button.btn-auth-send:active {
+    outline: 2px white solid;
+    outline-offset: 2px;
+}
+
+.error-msg {
+    color: rgb(255, 89, 89);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.error-msg svg {
+    width: 16px;
+    flex-shrink: 0;
+}
+
+.bad-value {
+    outline: rgb(255, 35, 35) solid 2px;
+}
+
+.auth-change {
+    text-align: center;
+    margin: 0;
+    color: rgb(185, 185, 185);
+}
+
+.auth-change a {
+    white-space: nowrap;
+}
+
+@media (max-width: 215px) {
+    button.btn-auth-send {
+        width: 100%;
+        min-width: 100%;
+    }
+}

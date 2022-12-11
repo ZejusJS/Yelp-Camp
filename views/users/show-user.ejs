@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/user-show.css" type="text/css">
+
+<section class="user-container">
+  <div class="user-info-container lighter-background">
+
+    <div>
+      <h2><%= user.username %></h2>
+    </div>
+
+    <div class="user-reviews-top-container">
+      <h4>Reviews</h4>
+      <div class="user-reviews-container">
+        <% for (let review of reviews) { %>
+        <div class="user-review">
+          <h5><a href="/campgrounds/<%=review.campgroundId%>"><%= review.campgroundTitle %></a></h5>
+          <p><%=review.rating%>/5&#9733 - <%=review.body%></p>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="user-campgrounds-container lighter-background">
+    <h4 class="users-campgrounds-header">Campgrounds</h4>
+    <% for (let campground of campgrounds) { %>
+    <div class="user-campground">
+      <div class="user-campground-img-container">
+        <a href="/campgrounds/<%= campground._id %> "><img src="<%= campground.images[0] ? campground.images[0].url : 'https://res.cloudinary.com/dnzagaln5/image/upload/v1669613670/YelpCamp/tent_camping_night_191593_1280x720_b6pg3p.jpg' %>" alt="" loading="lazy"></a>
+      </div>
+      <div class="user-campground-info">
+        <h4><a href="/campgrounds/<%= campground._id %> "><%= campground.title %></a></h4>
+        <p><%= campground.description %> </p>
+      </div>
+    </div>
+    <% } %>
+  </div>
+
+</section>

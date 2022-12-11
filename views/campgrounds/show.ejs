@@ -1,0 +1,173 @@
+<% layout('layouts/boilerplate') %>
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css' rel='stylesheet' />
+<link rel="stylesheet" href="/css/lib-starability-all.css">
+<link href="/css/camp-show.css" rel="stylesheet" type="text/css">
+<section class="campground-container">
+  <section class="info-review-container">
+    <div class="info-main-container">
+
+      <div class="infos-show">
+
+        <div class="camp-info-show img-container">
+          <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <% campground.images.forEach((img, i) => { %>
+              <div class="carousel-item <%= i === 0 ? 'active' : '' %> ">
+                <img src="<%= img.url %>" class="d-block w-100" alt="...">
+              </div>
+              <% }) %>
+            </div>
+            <% if (campground.images.length > 1) { %>
+            <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="camp-info-show">
+          <h1><%= campground.title %> <span class="campground-author">Submitted by <a href="/user/profile/<%= campground.author.username%>"><%= campground.author.username%></a> </span></h1>
+          <p><%= campground.description %> </p>
+        </div>
+        <div class="camp-info-show avg-rating">
+          <p> <%= campground.avgRating %>⭐</p>
+        </div>
+        <div class="camp-info-show location-line">
+          <svg class="gps-icon-camp" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve">
+            <g id="Maps">
+              <path d="M16,1C9.38,1,4,6.38,4,13c0,6.42,10.83,17.25,11.3,17.71C15.49,30.9,15.75,31,16,31s0.51-0.1,0.7-0.29   C17.17,30.25,28,19.42,28,13C28,6.38,22.62,1,16,1z" fill="rgb(216, 216, 216)" />
+              <circle cx="16" cy="13" fill="grey" r="5" />
+            </g>
+          </svg>
+          <p><%= campground.location %></p>
+        </div>
+        <div class="camp-info-show">
+          <p>$<%= campground.price%>/night </p>
+        </div>
+        <% if (currentUser && campground.author.equals(currentUser._id)) { %>
+        <% // .equals se používá pro id v mongodb %>
+        <div class="camp-info-show">
+          <form action="/campgrounds/<%=campground._id%>?method-override=DELETE" method="post" class="delete-camp-btn">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+          <a href="/campgrounds/<%=campground._id%>/edit/"><button type="button" class="btn btn-info">Edit</button></a>
+        </div>
+        <% } %>
+        <div class="camp-info-show time-of-create">
+          <p class="created-at">Submited on: <span class="date"><%= campground.createdAt %></span> </p>
+        </div>
+        <button id="show-map"><span><img src="/imgs/map3.svg" alt="">Show map</span>
+          <div class="spinner-border text-light" role="status"></div>
+        </button>
+        <div id='map' class="map"></div>
+      </div>
+
+    </div>
+
+    <div class="reviews-main-container" id="add-own-review">
+      <h4 class="review-header">Reviews</h4>
+      <div class="reviews-container">
+        <button type="button" id="add-review-btn">⭐<span>Add own review</span></button>
+        <div class="expandable-add-review">
+          <form action="/campgrounds/<%= campground._id %>/reviews" method="post" id="review-form" autocomplete="off" novalidate>
+            <div class="rating-div">
+              <fieldset class="starability-basic" id="starability-basic">
+                <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" checked />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+            </div>
+            <div class="body-div">
+              <label for="review-body">Review text:</label>
+              <textarea name="review[body]" id="review-body" cols="30" rows="30" minlength="15" maxlength="1800"></textarea>
+            </div>
+            <button type="submit" id="review-submit">Send a review</button>
+            <% if (!currentUser) { %>
+            <span class="not-logged">You must be <a href="/user/login">logged in</a> for submitting a review.</span>
+            <% } %>
+          </form>
+        </div>
+      </div>
+
+      <% if (campground.reviews.length > 0) { %>
+      <div class="reviews-show">
+        <% for (let review of campground.reviews) { %>
+        <div class="review">
+          <h5>
+            <p class="starability-result" data-rating="<%= review.rating %>">
+              Rated: <%= review.rating %> stars
+            </p>
+          </h5>
+          <h5 class="review-author"><a href="/user/profile/<%= review.author.username %> "><%= review.author.username %></a></h5>
+          <p> <%= review.body %> </p>
+          <% if (currentUser && review.author.equals(currentUser._id)) { %>
+          <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?method-override=DELETE" method="post">
+            <button type="submit" class="btn-review-delete">Delete Review</button>
+          </form>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+      <% } %>
+
+    </div>
+  </section>
+  <div>
+    <% if (currentUser) { %>
+    <form action="/comments/<%=campground._id%>" method="post" autocomplete="off">
+      <div class="comment-form">
+        <h4>Write a comment</h4>
+        <textarea maxlength="2000" minlength="1" type="text" name="text" placeholder="Comment as <%= currentUser.username %>..."></textarea>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    <% } else { %>
+    <div class="not-login">
+      <p>For writting a comment please <a href="/user/login">log in</a></p>
+    </div>
+    <% } %>
+    <div class="comment-section">
+      <h3>Comment section</h3>
+      <% for (let comment of campground.comments) { %>
+      <div class="comment">
+        <div class="comment-info">
+          <h5><%= comment.author.username %> </h5> <span class="created-at"><span class="date"><%=comment.createdAt%></span></span>
+          <% if (currentUser && comment.author.equals(currentUser._id)) { %>
+          <form action="/comments/<%=comment._id%>/<%=campground._id%>?method-override=DELETE" method="post">
+            <button class="btn-normal btn-small-delete" type="submit">Delete</button>
+          </form>
+          <% } %>
+        </div>
+        <p><%= comment.text %> </p>
+        <a href="/comments/<%=comment._id%>">Show replies ( <%=comment.replies.length %> )</a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+<script>
+  const mapboxt = "<%-process.env.MAPBOX_TOKEN%>";
+  const campgroundGeo = JSON.parse('<%-JSON.stringify(campground.geometry)%>');
+  const campgroundInfo = {
+    title: JSON.parse('<%-JSON.stringify(campground.title)%>'),
+    location: JSON.parse('<%-JSON.stringify(campground.location)%>')
+  };
+</script>
+<script src="/js/reviewValidity.js"></script>
+<script src="/js/show-campground.js"></script>
+
+<script src="/js/mapbox.js"></script>

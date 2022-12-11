@@ -1,0 +1,24 @@
+<% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/css/homepage.css">
+<div class="header-container">
+  <h1>Welcome to <span>Yelp Camp</span></h1>
+  <h2>There are <%= campCount %> campgrounds to explore!</h2>
+</div>
+
+<section class="features-section">
+  <div class="feature">
+    <h3>Find a campground you like</h3>
+    <p>Every campground has details about location and price per night. </p>
+    <p>You can view location of all campgrounds directly in interactive map. </p>
+    <p>Some campers leaves a review, so you can decide with them.</p>
+    <p>List of campgrounds is <a href="/campgrounds">here</a></p>
+  </div>
+  <div class="feature">
+    <h3>Add your campground</h3>
+    <p>Do you have your own campground or you know about campground which is not listed here? You can <a href="/campgrounds/new">add it</a>!</p>
+  </div>
+  <div class="feature">
+    <h3>Rate a campground</h3>
+    <p>If you have already slept in some campground, you can leave a review.</p>
+  </div>
+</section>

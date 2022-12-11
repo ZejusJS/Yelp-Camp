@@ -1,0 +1,219 @@
+.new {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 800px;
+    margin: 30px auto;
+}
+
+@media (max-width: 1000px) {
+    .new {
+        width: 100%;
+    }
+}
+
+.new input {
+    border: 1px solid rgb(73, 73, 73);
+    border-radius: 5px 5px 5px 5px;
+    height: 34px;
+}
+
+.new label {
+    font-size: 19px;
+}
+
+div.location-input-container {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: grey;
+    border-radius: 5px 5px 5px 5px;
+}
+
+div.location-input-container svg {
+    border: solid rgb(73, 73, 73);
+    border-width: 1px 0 1px 1px;
+    border-radius: 5px 0 0 5px;
+    padding: 0 5px;
+    box-sizing: content-box;
+}
+
+div.location-input-container input {
+    border-radius: 0 5px 5px 0;
+    border-width: 1px 1px 1px 0;
+    width: 100%;
+}
+
+.icon-input {
+    width: 22px;
+}
+
+.new.images-div input {
+    border: none !important;
+}
+
+#description {
+    height: 200px;
+    max-height: 300px;
+    min-height: 50px;
+    border: 1px solid rgb(73, 73, 73);
+}
+
+/* form validation */
+form.was-validated .new .bad-value {
+    background-color: rgb(223, 223, 223) !important;
+    border-color: red !important;
+    color: red !important;
+}
+
+form.was-validated .bad-value.bad-value-edited {
+    color: black !important;
+}
+
+.new:has(.bad-value) label {
+    color: rgb(255, 32, 32);
+}
+
+form.was-validated .new #images.bad-value {
+    background-color: rgb(223, 223, 223) !important;
+    border-color: red !important;
+    color: red !important;
+}
+
+input#images.file-inputs {
+    width: 100%;
+    height: fit-content;
+    color: #444;
+    padding: 2px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #555;
+}
+
+input#images.file-inputs::file-selector-button {
+    margin-right: 10px;
+    border: none;
+    background: #084cdf;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+}
+
+input#images.file-inputs::file-selector-button:hover {
+    background: #0b41b4;
+}
+
+.img-config {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 9px;
+    justify-content: center;
+
+    padding: 4px 1px 10px 1px;
+    background-color: rgb(39, 39, 39);
+    border: 1px solid rgb(73, 73, 73);
+    border-radius: 10px;
+}
+
+.img-config h4 {
+    margin: 0;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+}
+
+.img-config div {
+    width: 40%;
+    min-width: 110px;
+    height: auto;
+    position: relative;
+}
+
+.img-config img {
+    width: 100%;
+}
+
+.img-config input {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+}
+
+.img-config label {
+    position: absolute;
+}
+
+.img-deletetion-container:has(input:checked) img{
+    /* border: 1px solid red;
+    box-sizing: content-box; */
+    outline-style: dashed ;
+    outline-color: red ;
+    outline-width: 3px ;
+    outline-offset: 0px ;
+}
+
+@media (max-width: 600px) {
+    .img-config {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .img-config div {
+        width: 50%;
+    }
+
+    .img-config input {
+        left: -20px;
+        width: 15px;
+        height: 15px;
+    }
+}
+
+#error-msgs {
+    width: 100%;
+    font-size: 17px;
+}
+
+#error-msgs .danger-exclamation-circle {
+    color: red;
+    min-width: 16px;
+    min-height: 16px;
+}
+
+#error-msgs p {
+    margin: 0;
+    padding: 1.5px 0 1.5px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgb(255, 42, 42);
+    border-bottom: 2px solid rgb(100, 100, 100);
+}
+
+#error-msgs p:last-of-type {
+    border-color: transparent;
+}
+
+.title-alert {
+    margin: 0;
+    color: rgb(255, 42, 42);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.img-deletetion-container label {
+    position: unset;
+    align-items: center;
+    cursor: pointer;
+}
+
+.img-deletetion-container label img {
+    max-height: 300px;
+}
