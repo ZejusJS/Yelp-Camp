@@ -44,7 +44,7 @@ const sessionStore = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 60 * 60 * 10, // v SEKUNDÁCH!!!!!!
     crypto: {
-        secret: process.env.SECRET
+        secret: process.env.SECRET // 'secretword'
     }
 });
 
@@ -59,7 +59,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     store: sessionStore,
     name: "yelp-camp",
-    secret: process.env.SECRET,
+    secret: process.env.SECRET, // 'secretword'
     resave: false,
     saveUninitialized: false,
     cookie: {
