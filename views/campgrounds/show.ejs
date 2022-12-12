@@ -161,10 +161,10 @@
 </section>
 <script>
   const mapboxt = "<%-process.env.MAPBOX_TOKEN%>";
-  const campgroundGeo = JSON.parse('<%-JSON.stringify(campground.geometry)%>');
+  const campgroundGeo = JSON.parse(`<%-JSON.stringify(campground.geometry)%>`);
   const campgroundInfo = {
-    title: JSON.parse('<%-JSON.stringify(campground.title)%>'),
-    location: JSON.parse('<%-JSON.stringify(campground.location)%>')
+    title: JSON.parse(`<%-JSON.stringify(campground.title)%>`),
+    location: JSON.parse(`<%-JSON.stringify(campground.location)%>`)
   };
 </script>
 <script src="/js/reviewValidity.js"></script>
