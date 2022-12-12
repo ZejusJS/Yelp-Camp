@@ -6,8 +6,8 @@ const ExpressError = require('../utils/ExpressError');
 const db = mongoose.connection;
 
 const maxConsPointsComment = 1;
-const maxConsPointsIp = 30;
-const maxConsPointsDelete = 4;
+const maxConsPointsIp = 90;
+const maxConsPointsDelete = 5;
 
 const opts = {
     storeClient: db,
@@ -42,7 +42,7 @@ module.exports.limitPost = catchAsync(async function (req, res, next) {
 
         if (userId && userPoint && userPoint.consumedPoints > maxConsPointsComment) {
             req.flash('error', 'Too many requests !!!')
-            res.redirect('/')
+            res.redirect('/campgrounds')
         } else {
             await rateLimiterComments.consume(userId, 1);
             next()
@@ -91,7 +91,7 @@ module.exports.limitDelete = catchAsync(async function (req, res, next) {
         const userId = req.user._id
         const userPoint = await rateLimiterComments.get(userId)
 
-        if (userId && userPoint && userPoint.consumedPoints > maxConsPointsComment) {
+        if (userId && userPoint && userPoint.consumedPoints > maxConsPointsDelete) {
             req.flash('error', 'Too many requests !!!')
             res.redirect('/')
         } else {

@@ -34,6 +34,6 @@ router.get('/logout', limitPost, catchAsync(users.logout));
 
 router.get('/profile/:username', catchAsync(users.show));
 
-router.post('/usernamecheck', catchAsync(users.usernamecheck))
+router.post('/usernamecheck', isFromUserRoute, catchAsync(users.usernamecheck))
 
 module.exports = router;

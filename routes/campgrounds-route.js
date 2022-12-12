@@ -18,7 +18,7 @@ const Review = require('../models/review');
 
 
 const { mwUploadCampImg } = require('../utils/mw-imgUpload');
-
+const { isFromCampgroundsIndex } = require('../utils/checkReferer')
 
 // controllers require:
 const campgrounds = require('../controllers/campgrounds')
@@ -37,7 +37,7 @@ router.route('/:id')
 
 router.get('/:id/edit', isLoggedIn, isAuthorCamp, catchAsync(campgrounds.edit))
 
-router.post('/istitletaken', catchAsync(campgrounds.title))
+router.post('/istitletaken', isFromCampgroundsIndex, catchAsync(campgrounds.title))
 
 
 
