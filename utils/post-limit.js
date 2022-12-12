@@ -33,6 +33,8 @@ const opts3 = {
     keyPrefix: 'request_once',
 };
 
+
+
 module.exports.limitPost = catchAsync(async function (req, res, next) {
     try {
         const rateLimiterComments = new RateLimiterMongo(opts);
@@ -86,16 +88,16 @@ module.exports.limitIp = catchAsync(async function (req, res, next) {
 
 module.exports.limitDelete = catchAsync(async function (req, res, next) {
     try {
-        const rateLimiterComments = new RateLimiterMongo(opts3);
+        const rateLimiterDeletes = new RateLimiterMongo(opts3);
 
         const userId = req.user._id
-        const userPoint = await rateLimiterComments.get(userId)
+        const userPoint = await rateLimiterDeletes.get(userId)
 
         if (userId && userPoint && userPoint.consumedPoints > maxConsPointsDelete) {
             req.flash('error', 'Too many requests !!!')
             res.redirect('/')
         } else {
-            await rateLimiterComments.consume(userId, 1);
+            await rateLimiterDeletes.consume(userId, 1);
             next()
         }
     } catch (e) {
@@ -105,6 +107,29 @@ module.exports.limitDelete = catchAsync(async function (req, res, next) {
         } else {
             const err = new ExpressError(500, 'Internal Server Error while limiting requests. Try limit your number of requests on this website.')
             next(err)
+        }
+    }
+})
+
+module.exports.isSuspended = catchAsync(async function (req, res, next) {
+    try {
+        const rateLimiterComments = new RateLimiterMongo(opts);
+
+        const userId = req.user._id
+        const userPoint = await rateLimiterComments.get(userId)
+        console.log('--------', userId)
+        console.log(userPoint)
+
+        if (userId && userPoint && userPoint.consumedPoints >= maxConsPointsComment) {
+            res.status(200).send('TOO MANY REQUESTS')
+        } else {
+            res.status(200).send('YEP')
+        }
+    } catch (e) {
+        if (e.remainingPoints === 0) {
+            res.status(200).send('TOO MANY REQUESTS')
+        } else {
+            res.status(200).send('TOO MANY REQUESTS')
         }
     }
 })

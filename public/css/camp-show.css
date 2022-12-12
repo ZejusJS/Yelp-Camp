@@ -466,3 +466,7 @@ main:has(.map-showed) #show-map {
     text-align: center;
     font-size: 18px;
 }
+
+.bad-value-comment {
+    outline: red solid 1px;
+}

@@ -143,7 +143,7 @@ passport.deserializeUser(User.deserializeUser());
 
 const validateCampground = require('./utils/mw-validateCampground');
 const validateReview = require('./utils/mw-validateReview');
-const { limitPost, limitIp, limitDelete } = require('./utils/post-limit')
+const { limitPost, limitIp, limitDelete, isSuspended } = require('./utils/post-limit')
 
 const Campground = require('./models/campground');
 const Review = require('./models/review');
@@ -179,6 +179,7 @@ app.get('/about', function (req, res) {
 const { isFromCampgroundsIndex } = require('./utils/checkReferer')
 const campgrounds = require('./controllers/campgrounds')
 app.get('/campgrounds_map_data', isFromCampgroundsIndex, limitIp, catchAsync(campgrounds.mapdata))
+app.post('/issuspended', isSuspended)
 
 // ----------
 

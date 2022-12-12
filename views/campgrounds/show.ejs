@@ -53,7 +53,7 @@
         <% if (currentUser && campground.author.equals(currentUser._id)) { %>
         <% // .equals se používá pro id v mongodb %>
         <div class="camp-info-show">
-          <form action="/campgrounds/<%=campground._id%>?method-override=DELETE" method="post" class="delete-camp-btn">
+          <form action="/campgrounds/<%=campground._id%>?method-override=DELETE" method="post" class="delete-camp-btn" class="form-to-stop">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
           <a href="/campgrounds/<%=campground._id%>/edit/"><button type="button" class="btn btn-info">Edit</button></a>
@@ -75,7 +75,7 @@
       <div class="reviews-container">
         <button type="button" id="add-review-btn">⭐<span>Add own review</span></button>
         <div class="expandable-add-review">
-          <form action="/campgrounds/<%= campground._id %>/reviews" method="post" id="review-form" autocomplete="off" novalidate>
+          <form action="/campgrounds/<%= campground._id %>/reviews" method="post" id="review-form" autocomplete="off" novalidate class="form-to-stop">
             <div class="rating-div">
               <fieldset class="starability-basic" id="starability-basic">
                 <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" aria-label="No rating." />
@@ -115,7 +115,7 @@
           <h5 class="review-author"><a href="/user/profile/<%= review.author.username %> "><%= review.author.username %></a></h5>
           <p> <%= review.body %> </p>
           <% if (currentUser && review.author.equals(currentUser._id)) { %>
-          <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?method-override=DELETE" method="post">
+          <form action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?method-override=DELETE" method="post" class="form-to-stop">
             <button type="submit" class="btn-review-delete">Delete Review</button>
           </form>
           <% } %>
@@ -128,10 +128,10 @@
   </section>
   <div>
     <% if (currentUser) { %>
-    <form action="/comments/<%=campground._id%>" method="post" autocomplete="off">
+    <form action="/comments/<%=campground._id%>" method="post" autocomplete="off" onsubmit="check_comment(this); return false;" class="form-to-stop" id="comment-form">
       <div class="comment-form">
         <h4>Write a comment</h4>
-        <textarea maxlength="2000" minlength="1" type="text" name="text" placeholder="Comment as <%= currentUser.username %>..."></textarea>
+        <textarea class="comment-text" maxlength="2000" minlength="1" type="text" name="text" placeholder="Comment as <%= currentUser.username %>..."></textarea>
         <button type="submit">Submit</button>
       </div>
     </form>
@@ -147,7 +147,7 @@
         <div class="comment-info">
           <h5><%= comment.author.username %> </h5> <span class="created-at"><span class="date"><%=comment.createdAt%></span></span>
           <% if (currentUser && comment.author.equals(currentUser._id)) { %>
-          <form action="/comments/<%=comment._id%>/<%=campground._id%>?method-override=DELETE" method="post">
+          <form action="/comments/<%=comment._id%>/<%=campground._id%>?method-override=DELETE" method="post" class="form-to-stop">
             <button class="btn-normal btn-small-delete" type="submit">Delete</button>
           </form>
           <% } %>

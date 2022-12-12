@@ -57,15 +57,88 @@ try {
 
 }
 
-try {
-    const forms = document.querySelectorAll('form')
-    const buttonInForms = document.querySelectorAll('form button')
+const formsToStop = document.querySelectorAll('.form-to-stop')
+const buttonInForms = document.querySelectorAll('form button')
 
-    forms.forEach(function (form){
-        form.addEventListener('submit', function(e) {
+try {
+    formsToStop.forEach(function (form) {
+        form.addEventListener('submit', function (e) {
             buttonInForms.forEach(btn => btn.disabled = true)
         })
     })
 } catch (e) {
     console.error(e)
+}
+
+
+async function check_form(form) {
+    function isSuspended(res) {
+        let formSubmitting = false;
+        if (res.data === "YEP") {
+            formSubmitting = true
+            form.submit()
+            // console.log('dsgfsdgsdg')
+        } else if (!formSubmitting) {
+            const alert = document.querySelector('.alert-top-wrapper .alert-top');
+            alert.classList.add('alert-top-visible');
+            setTimeout(() => {
+                alert.classList.remove('alert-top-visible');
+            }, 4000);
+            setTimeout(() => {
+                buttonInForms.forEach(btn => btn.disabled = false)
+            }, 1000);
+        }
+    }
+    await axios({
+        method: 'post',
+        url: '/issuspended'
+    })
+        .then((res) => isSuspended(res))
+        .catch();
+}
+
+
+async function check_comment(form) {
+    const selectedForm = document.getElementById(form.getAttribute('id'))
+    const textComment = document.querySelector(`#${form.getAttribute('id')} .comment-text`)
+    if (textComment.value.length < 1 || textComment.value.length > 2000) {
+        textComment.classList.add('bad-value-comment');
+        setTimeout(() => {
+            buttonInForms.forEach(btn => btn.disabled = false)
+        }, 50);
+        textComment.addEventListener('input', function () {
+            if (textComment.value.length > 0 && textComment.value.length < 1999) {
+                textComment.classList.remove('bad-value-comment');
+            } else {
+                textComment.classList.add('bad-value-comment');
+            }
+        })
+    } else {
+        textComment.classList.remove('bad-value-comment');
+        function isSuspended(res) {
+            let formSubmitting = false;
+            if (res.data === "YEP") {
+                formSubmitting = true
+                form.submit()
+                // console.log('dsgfsdgsdg')
+            } else if (!formSubmitting) {
+                const alert = document.querySelector('.alert-top-wrapper .alert-top');
+                const aletrTopText = document.querySelector('.alert-top span')
+                aletrTopText.innerHTML = "Please wait before posting another comment"
+                    alert.classList.add('alert-top-visible');
+                setTimeout(() => {
+                    alert.classList.remove('alert-top-visible');
+                }, 4000);
+                setTimeout(() => {
+                    buttonInForms.forEach(btn => btn.disabled = false)
+                }, 1000);
+            }
+        }
+        await axios({
+            method: 'post',
+            url: '/issuspended'
+        })
+            .then((res) => isSuspended(res))
+            .catch();
+    }
 }

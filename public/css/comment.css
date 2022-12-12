@@ -108,3 +108,7 @@ h3 {
     font-size: 18px;
     margin: 0;
 }
+
+.bad-value-comment {
+    outline: red solid 1px;
+}

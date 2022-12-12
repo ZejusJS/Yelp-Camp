@@ -8,9 +8,9 @@
     <h4><%= comment.text %> </h4>
   </section>
   <% if (currentUser) { %>
-  <form action="/comments/reply/<%= comment._id %> " method="post" autocomplete="off">
+  <form action="/comments/reply/<%= comment._id %> " method="post" autocomplete="off" class="form-to-stop" onsubmit="check_comment(this); return false;" id="comment-form"> 
     <div id="reply-to-comment" class="reply-to-comment">
-      <textarea maxlength="2000" minlength="1" type="text" name="text" placeholder="Reply to <%= comment.author.username %> as <%= currentUser.username %>..."></textarea>
+      <textarea class="comment-text" maxlength="2000" minlength="1" type="text" name="text" placeholder="Reply to <%= comment.author.username %> as <%= currentUser.username %>..."></textarea>
       <button type="submit">Reply</button>
     </div>
   </form>
@@ -26,7 +26,7 @@
       <div class="reply-info">
         <h5><%= reply.author.username %> </h5> <span class="created-at"><span class="date"><%= reply.createdAt %></span></span>
         <% if (currentUser && reply.author.equals(currentUser._id)) { %>
-        <form action="/comments/reply/<%= comment._id %>/<%= reply._id %>?method-override=DELETE" method="post">
+        <form action="/comments/reply/<%= comment._id %>/<%= reply._id %>?method-override=DELETE" method="post" class="form-to-stop">
           <button class="btn-normal btn-small-delete" type="submit">Delete</button>
         </form>
         <% } %>
