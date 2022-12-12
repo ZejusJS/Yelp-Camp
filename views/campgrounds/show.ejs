@@ -75,7 +75,7 @@
       <div class="reviews-container">
         <button type="button" id="add-review-btn">⭐<span>Add own review</span></button>
         <div class="expandable-add-review">
-          <form action="/campgrounds/<%= campground._id %>/reviews" method="post" id="review-form" autocomplete="off" novalidate class="form-to-stop">
+          <form action="/campgrounds/<%= campground._id %>/reviews" method="post" id="review-form" autocomplete="off" novalidate class="form-to-stop" onsubmit="check_review(this); return false;">
             <div class="rating-div">
               <fieldset class="starability-basic" id="starability-basic">
                 <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" aria-label="No rating." />

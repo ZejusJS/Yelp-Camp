@@ -31,12 +31,10 @@ try {
             maxPage = true
           }
           if (res.data) {
-            console.log('aaaaaaaaaaaaaaa')
             const div = document.createElement('div');
             div.innerHTML = res.data;
             campgroundsList.append(div);
             nextPage++
-            console.log(res.status)
             campgroundsUrl = campgroundsUrl.replace(/(page=)\d+/g, `page=${nextPage}`)
           }
         })
