@@ -14,6 +14,7 @@ const Comment = require('../models/comment');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapboxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapboxToken });
+const { isFromCampgroundsIndexInRoute } = require('../utils/checkReferer')
 
 const { cloudinary } = require('../cloudinary/index')
 const { storageCampImg } = require('../cloudinary/index')
@@ -24,7 +25,7 @@ const uploadCampImg = multer({ storage: storageCampImg, limits: { fileSize: 1000
 module.exports.index = async function (req, res) {
     const accept = JSON.stringify(req.headers.accept)
 
-    if (!req.query.page && !req.query.search || req.query.page && !req.query.infinite) {
+    if (!req.query.page && !req.query.search && !req.query.infinite || req.query.page && !req.query.infinite) {
         const campgrounds = await Campground.paginate({}, {
             sort: {
                 _id: "descending",
@@ -33,10 +34,11 @@ module.exports.index = async function (req, res) {
             limit: 10
         }).then({});
         return res.render('campgrounds/index', { campgrounds, searchInput: null, stype: null });
-    } else if (req.query.infinite && accept.match(/(application\/json, text\/plain)/g)) { // /(application\/json, text\/plain)/g je aby to bylo jen z axios (ten acceptuje jen plain text nebo json)
+    } else if (req.query.infinite && accept === '"text/html"' && isFromCampgroundsIndexInRoute(req, res)) { // /(application\/json, text\/plain)/g je aby to bylo jen z axios (ten acceptuje jen plain text nebo json)  // 
         const { page, search = "", stype = "" } = req.query
         const searchInput = search.trim()
         let find = {};
+        console.log(accept)
         if (stype === "title" || !stype.length) {
             find = {
                 title: { $in: new RegExp(searchInput, "i") }
@@ -58,9 +60,14 @@ module.exports.index = async function (req, res) {
             if (err) {
                 return next(err);
             }
-            return res.status(200).json(result)
+            console.log(result)
+            if (page <= result.totalPages) {
+                return res.status(200).render('campgrounds/paginatedCampgrounds', { campgrounds: result.docs })
+            } else {
+                return res.status(204).send('MAX PAGE')
+            }
         })
-    } else if (req.query.search) {
+    } else if (req.query.search && !req.query.infinite) {
         const { search = "", stype = "" } = req.query
         const searchInput = search.trim()
         let find;

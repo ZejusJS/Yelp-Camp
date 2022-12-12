@@ -12,6 +12,8 @@ const { validateRegister, validateLogin } = require('../utils/mw-validateAuth');
 const { isLoggedIn, isLoggedInNeg } = require('../utils/mw-authentication'); // isLoggedInNeg (použitý pro odmítnutí přihlášení, pokud už je user signed in) je opak isLoggedIn
 const { limitPost, limitIp } = require('../utils/post-limit')
 
+const { isFromUserRoute } = require('../utils/checkReferer')
+
 //controllers require:
 const users = require('../controllers/users');
 //

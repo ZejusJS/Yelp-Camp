@@ -13,26 +13,30 @@ try {
   if (stype && stype.length > 0) {
     campgroundsUrl = campgroundsUrl + `&stype=${stype}`;
   }
-  let nextPageCheck = "";
+  let maxPage = false;
+  let nextPage = 1;
 
   function startLoad() {
     // e.preventDefault();
-    if (nextPageCheck != null) {
+    if (!maxPage) {
       axios({
         method: 'get',
-        url: `${campgroundsUrl}`
+        url: `${campgroundsUrl}`,
+        headers: {
+          'Accept': 'text/html'
+        }
       })
         .then((res) => {
-          if (res.data.docs) {
-            for (let campground of res.data.docs) {
-              let template = loadCampground(campground);
-              const div = document.createElement('div');
-              div.classList.add('campground-view');
-              div.innerHTML = template;
-              campgroundsList.append(div);
-            }
-            let { nextPage } = res.data;
-            nextPageCheck = nextPage
+          if (res.status === 204) {
+            maxPage = true
+          }
+          if (res.data) {
+            console.log('aaaaaaaaaaaaaaa')
+            const div = document.createElement('div');
+            div.innerHTML = res.data;
+            campgroundsList.append(div);
+            nextPage++
+            console.log(res.status)
             campgroundsUrl = campgroundsUrl.replace(/(page=)\d+/g, `page=${nextPage}`)
           }
         })
@@ -40,26 +44,26 @@ try {
     }
   }
 
-  function loadCampground(campground) {
-    return `
-    <div class="camp-img-container">
-      <a href="/campgrounds/${campground._id}" class="camp-view-link"><img loading="lazy" src="${campground.images[0] ? campground.images[0].url : 'https://res.cloudinary.com/dnzagaln5/image/upload/v1669613670/YelpCamp/tent_camping_night_191593_1280x720_b6pg3p.jpg'}" alt=""></a>
-    </div>
-    <div class="camp-info-container">
-      <div><a href="/campgrounds/${campground._id}" class="link-camp index">${campground.title}</a></div>
-      <div class="camp-info">
-        <p class="camp-description index">${campground.description}</p>
-        <p><svg class="gps-icon-camp" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve">
-            <g id="Maps">
-              <path d="M16,1C9.38,1,4,6.38,4,13c0,6.42,10.83,17.25,11.3,17.71C15.49,30.9,15.75,31,16,31s0.51-0.1,0.7-0.29   C17.17,30.25,28,19.42,28,13C28,6.38,22.62,1,16,1z" fill="#fff" />
-              <circle cx="16" cy="13" fill="grey" r="5" />
-            </g>
-          </svg>${campground.location}</p>
-        <p>${campground.price}$</p>
-      </div>
-    </div>
-  `
-  }
+  // function loadCampground(campground) {
+  //   return `
+  //   <div class="camp-img-container">
+  //     <a href="/campgrounds/${campground._id}" class="camp-view-link"><img loading="lazy" src="${campground.images[0] ? campground.images[0].url : 'https://res.cloudinary.com/dnzagaln5/image/upload/v1669613670/YelpCamp/tent_camping_night_191593_1280x720_b6pg3p.jpg'}" alt=""></a>
+  //   </div>
+  //   <div class="camp-info-container">
+  //     <div><a href="/campgrounds/${campground._id}" class="link-camp index">${campground.title}</a></div>
+  //     <div class="camp-info">
+  //       <p class="camp-description index">${campground.description}</p>
+  //       <p><svg class="gps-icon-camp" width="32px" height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" version="1.1" xml:space="preserve">
+  //           <g id="Maps">
+  //             <path d="M16,1C9.38,1,4,6.38,4,13c0,6.42,10.83,17.25,11.3,17.71C15.49,30.9,15.75,31,16,31s0.51-0.1,0.7-0.29   C17.17,30.25,28,19.42,28,13C28,6.38,22.62,1,16,1z" fill="#fff" />
+  //             <circle cx="16" cy="13" fill="grey" r="5" />
+  //           </g>
+  //         </svg>${campground.location}</p>
+  //       <p>${campground.price}$</p>
+  //     </div>
+  //   </div>
+  // `
+  // }
 
   // window.onscroll = function () {
   //     if ((window.innerHeight + Math.ceil(window.pageYOffset)) >= document.body.offsetHeight - 800) {
