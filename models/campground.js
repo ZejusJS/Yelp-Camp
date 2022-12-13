@@ -102,7 +102,9 @@ CampGroundSchema.virtual('avgRating').get(function () {
     let ratingSum = 0
     const reviews = this.reviews
     reviews.forEach(r => ratingSum += r.rating)
-    return ratingSum ? ratingSum / reviews.length : 0;
+    const toPerc = ratingSum / reviews.length
+    const pert = (toPerc / 5) * 100
+    return ratingSum ? pert.toFixed(0): 0;
 })
 //
 
